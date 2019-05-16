@@ -22,4 +22,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('roles', 'web\RolController');
     Route::resource('clientes', 'web\ClienteController');
     Route::resource('horarios', 'web\HorarioController');
+    Route::resource('empleados', 'web\EmpleadoController');
 });
