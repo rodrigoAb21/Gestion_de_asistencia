@@ -15,6 +15,7 @@
     <link href="{{asset('plantilla/material/css/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
     <link href="{{asset('plantilla/material/css/colors/blue.css')}}" id="theme" rel="stylesheet">
+    @stack('arriba')
 </head>
 
 <body class="fix-header card-no-border">

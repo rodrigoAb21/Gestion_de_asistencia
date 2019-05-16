@@ -66,7 +66,7 @@ class UbicacionController extends Controller
      */
     public function edit($id)
     {
-        return view('vistas.ubicaciones.edit',['rol' => Ubicacion::findOrFail($id)]);
+        return view('vistas.ubicaciones.edit',['ubicacion' => Ubicacion::findOrFail($id)]);
     }
 
     /**

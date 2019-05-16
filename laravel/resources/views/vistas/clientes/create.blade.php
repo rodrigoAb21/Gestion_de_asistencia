@@ -6,10 +6,10 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="pb-2">
-                        Nueva Ubicacion
+                        Nuevo Cliente
                     </h3>
 
-                    <form method="POST" action="{{url('ubicaciones')}}" autocomplete="off">
+                    <form method="POST" action="{{url('clientes')}}" autocomplete="off">
                         {{csrf_field()}}
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
