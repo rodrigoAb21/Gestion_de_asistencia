@@ -15,3 +15,5 @@ laravel/.env
 laravel/Homestead.yaml
 laravel/Homestead.json
 laravel/.vagrant
+
+laravel/public/img/
