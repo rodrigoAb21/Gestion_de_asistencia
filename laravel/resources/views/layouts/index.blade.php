@@ -107,37 +107,37 @@
 
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
-                        <li>
+                        <li class="{{ Request::is('empleados*') ? 'nav-item active' : 'nav-item' }}">
                             <a href="{{url('empleados')}}" >
                                 <i class="fa fa-users"></i>
                                 <span class="hide-menu"> Gest. Empleados</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ Request::is('roles*') ? 'nav-item active' : 'nav-item' }}">
                             <a href="{{url('roles')}}" >
                                 <i class="fa fa-users-cog"></i>
                                 <span class="hide-menu"> Gest. Roles</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ Request::is('horarios*') ? 'nav-item active' : 'nav-item' }}">
                             <a href="{{url('horarios')}}" >
                                 <i class="fa fa-calendar-alt"></i>
                                 <span class="hide-menu"> Gest. Horarios</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ Request::is('asignaciones*') ? 'nav-item active' : 'nav-item' }}">
                             <a href="{{url('asignaciones')}}" >
                                 <i class="fa fa-hand-point-right"></i>
                                 <span class="hide-menu"> Asignaciones</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ Request::is('clientes*') ? 'nav-item active' : 'nav-item' }}">
                             <a href="{{url('clientes')}}" >
                                 <i class="fa fa-user-tie"></i>
                                 <span class="hide-menu"> Gest. Clientes</span>
                             </a>
                         </li>
-                        <li>
+                        <li class="{{ Request::is('ubicaciones*') ? 'nav-item active' : 'nav-item' }}">
                             <a href="{{url('ubicaciones')}}" >
                                 <i class="fa fa-building"></i>
                                 <span class="hide-menu"> Gest. Ubicaciones</span>

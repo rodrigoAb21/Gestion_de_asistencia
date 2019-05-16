@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Ubicacion;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,7 +15,7 @@ class UbicacionController extends Controller
      */
     public function index()
     {
-        //
+        return view('vistas.ubicaciones.index', ['ubicaciones' => Ubicacion::where('visible','=',true)->paginate(5)]);
     }
 
     /**
@@ -24,7 +25,7 @@ class UbicacionController extends Controller
      */
     public function create()
     {
-        //
+        return view('vistas.ubicaciones.create');
     }
 
     /**
@@ -35,7 +36,15 @@ class UbicacionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $ubicacion = new Ubicacion();
+        $ubicacion->nombre = $request['nombre'];
+        $ubicacion->direccion = $request['direccion'];
+        $ubicacion->telefono = $request['telefono'];
+        $ubicacion->latitud = $request['latitud'];
+        $ubicacion->longitud = $request['longitud'];
+        $ubicacion->save();
+
+        return redirect('ubicaciones');
     }
 
     /**
@@ -57,7 +66,7 @@ class UbicacionController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('vistas.ubicaciones.edit',['rol' => Ubicacion::findOrFail($id)]);
     }
 
     /**
@@ -69,7 +78,15 @@ class UbicacionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $ubicacion = Ubicacion::findOrFail($id);
+        $ubicacion->nombre = $request['nombre'];
+        $ubicacion->direccion = $request['direccion'];
+        $ubicacion->telefono = $request['telefono'];
+        $ubicacion->latitud = $request['latitud'];
+        $ubicacion->longitud = $request['longitud'];
+        $ubicacion->save();
+
+        return redirect('ubicaciones');
     }
 
     /**
@@ -80,6 +97,10 @@ class UbicacionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ubicacion = Ubicacion::findOrFail($id);
+        $ubicacion->visible = false;
+        $ubicacion->save();
+
+        return redirect('ubicaciones');
     }
 }
