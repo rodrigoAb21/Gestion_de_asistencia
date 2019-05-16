@@ -17,4 +17,9 @@ Route::get('/', function () {
     return view('home');
 })->middleware('auth');
 
-
+Route::middleware('auth')->group(function () {
+    Route::resource('ubicaciones', 'web\UbicacionController');
+    Route::resource('roles', 'web\RolController');
+    Route::resource('clientes', 'web\ClienteController');
+    Route::resource('horarios', 'web\HorarioController');
+});

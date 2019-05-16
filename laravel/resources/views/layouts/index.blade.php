@@ -14,7 +14,7 @@
     <!-- Custom CSS -->
     <link href="{{asset('plantilla/material/css/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="{{asset('plantilla/material/css/colors/megna.css')}}" id="theme" rel="stylesheet">
+    <link href="{{asset('plantilla/material/css/colors/blue.css')}}" id="theme" rel="stylesheet">
 </head>
 
 <body class="fix-header card-no-border">
@@ -108,22 +108,40 @@
                 <nav class="sidebar-nav">
                     <ul id="sidebarnav">
                         <li>
-                            <a href="#" ><i class="fa fa-users"></i><span class="hide-menu"> Gest. Empleados</span></a>
+                            <a href="{{url('empleados')}}" >
+                                <i class="fa fa-users"></i>
+                                <span class="hide-menu"> Gest. Empleados</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#" ><i class="fa fa-users-cog"></i><span class="hide-menu"> Gest. Roles</span></a>
+                            <a href="{{url('roles')}}" >
+                                <i class="fa fa-users-cog"></i>
+                                <span class="hide-menu"> Gest. Roles</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#" ><i class="fa fa-calendar-alt"></i><span class="hide-menu"> Gest. Horarios</span></a>
+                            <a href="{{url('horarios')}}" >
+                                <i class="fa fa-calendar-alt"></i>
+                                <span class="hide-menu"> Gest. Horarios</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#" ><i class="fa fa-hand-point-right"></i><span class="hide-menu"> Asignaciones</span></a>
+                            <a href="{{url('asignaciones')}}" >
+                                <i class="fa fa-hand-point-right"></i>
+                                <span class="hide-menu"> Asignaciones</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#" ><i class="fa fa-user-tie"></i><span class="hide-menu"> Gest. Clientes</span></a>
+                            <a href="{{url('clientes')}}" >
+                                <i class="fa fa-user-tie"></i>
+                                <span class="hide-menu"> Gest. Clientes</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="#" ><i class="fa fa-building"></i><span class="hide-menu"> Gest. Ubicaciones</span></a>
+                            <a href="{{url('ubicaciones')}}" >
+                                <i class="fa fa-building"></i>
+                                <span class="hide-menu"> Gest. Ubicaciones</span>
+                            </a>
                         </li>
                     </ul>
                 </nav>
@@ -185,6 +203,7 @@
     <!-- Style switcher -->
     <!-- ============================================================== -->
     <script src="{{asset('plantilla/assets/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
+    @stack('scripts')
 </body>
 
 </html>
