@@ -76,7 +76,16 @@ class EmpleadoController extends Controller
      */
     public function show($id)
     {
-        //
+        $empleado = DB::table('users')
+            ->join('rol', 'users.rol_id','=', 'rol.id')
+            ->join('ubicacion', 'users.ubicacion_id','=', 'ubicacion.id')
+            ->where('users.id','=', $id)
+            ->where('users.visible','=', true)
+            ->select('users.id', 'users.nombre', 'users.direccion', 'users.telefono', 'users.email', 'users.foto',
+                'rol.nombre as rol', 'ubicacion.nombre as ubicacion')
+            ->first();
+
+        return view('vistas.empleados.show', ['empleado' => $empleado]);
     }
 
     /**
@@ -87,7 +96,9 @@ class EmpleadoController extends Controller
      */
     public function edit($id)
     {
-        return view('vistas.empleados.edit',['cliente' => User::findOrFail($id)]);
+        $ubicaciones = Ubicacion::where('visible','=',true)->get();
+        $roles = Rol::where('visible','=',true)->get();
+        return view('vistas.empleados.edit',['empleado' => User::findOrFail($id), 'ubicaciones' => $ubicaciones, 'roles' => $roles]);
     }
 
     /**
@@ -103,9 +114,23 @@ class EmpleadoController extends Controller
         $empleado->nombre = $request['nombre'];
         $empleado->direccion = $request['direccion'];
         $empleado->telefono = $request['telefono'];
-        $empleado->latitud = $request['latitud'];
-        $empleado->longitud = $request['longitud'];
+        $empleado->email = $request['email'];
+
+        if (trim($request['password']) != ""){
+            $empleado -> password = bcrypt($request['password']);
+        }
+
+        $empleado->ubicacion_id = $request['ubicacion_id'];
+        $empleado->rol_id = $request['rol_id'];
+
+        if (Input::hasFile('foto')) {
+            $file = Input::file('foto');
+            $file->move(public_path() . '/img/', $file->getClientOriginalName());
+            $empleado->foto = $file->getClientOriginalName();
+        }
+
         $empleado->save();
+
 
         return redirect('empleados');
     }

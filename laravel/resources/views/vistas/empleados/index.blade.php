@@ -8,7 +8,7 @@
                     <h3 class="pb-2">Gestionar Empleados
                         <div class="float-right">
                             <a class="btn btn-success" href="{{url('empleados/create')}}">
-                                <i class="fa fa-plus"></i> Nueva
+                                <i class="fa fa-plus"></i> Nuevo
                             </a>
                         </div>
                     </h3>
@@ -31,6 +31,11 @@
                                     <td>{{$empleado -> rol}}</td>
                                     <td>{{$empleado -> ubicacion}}</td>
                                     <td class="text-right ">
+                                        <a href="{{url('empleados/'.$empleado->id)}}">
+                                            <button class="btn btn-secondary">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </a>
                                         <a href="{{url('empleados/'.$empleado->id.'/edit')}}">
                                             <button class="btn btn-warning">
                                                 <i class="fa fa-pen"></i>
