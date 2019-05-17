@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Dia;
+use App\Horario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class HorarioController extends Controller
 {
@@ -14,7 +17,7 @@ class HorarioController extends Controller
      */
     public function index()
     {
-        //
+        return view('vistas.horarios.index', ['horarios' => Horario::where('visible', '=', true)->paginate(5)]);
     }
 
     /**
@@ -24,7 +27,9 @@ class HorarioController extends Controller
      */
     public function create()
     {
-        //
+        $turnos = ['Mañana', 'Tarde', 'Noche', 'Continuo'];
+        $dias = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
+        return view('vistas.horarios.create',['dias' => $dias, 'turnos' => $turnos]);
     }
 
     /**
@@ -35,7 +40,40 @@ class HorarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try{
+
+            DB::beginTransaction();
+
+            $horario = new Horario();
+            $horario->nombre = $request['nombre'];
+            $horario->turno = $request['turno'];
+            $horario->save();
+
+            $nombres = $request['nombresT'];
+            $entradas = $request['entradasT'];
+            $salidas = $request['salidasT'];
+
+            $cont = 0;
+
+            while ($cont < count($nombres)) {
+                $dia = new Dia();
+                $dia->nombre = $nombres[$cont];
+                $dia->entrada = $entradas[$cont];
+                $dia->salida = $salidas[$cont];
+                $dia->save();
+
+                $cont++;
+            }
+
+            DB::commit();
+
+        }catch (Exception $e){
+
+            DB::rollback();
+
+        }
+
+        return redirect('horarios');
     }
 
     /**
@@ -80,6 +118,10 @@ class HorarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $horario = Horario::findOrFail($id);
+        $horario->visible = false;
+        $horario->save();
+
+        return redirect('horarios');
     }
 }

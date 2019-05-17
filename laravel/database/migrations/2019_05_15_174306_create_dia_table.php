@@ -19,6 +19,9 @@ class CreateDiaTable extends Migration
             $table->string('entrada');
             $table->string('salida');
             $table->boolean('visible')->default(true);
+
+            $table->unsignedInteger('horario_id');
+            $table->foreign('horario_id')->references('id')->on('horario');
         });
     }
 
