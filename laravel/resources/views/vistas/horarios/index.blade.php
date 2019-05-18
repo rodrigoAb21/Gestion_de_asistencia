@@ -29,6 +29,11 @@
                                     <td>{{$horario->nombre}}</td>
                                     <td>{{$horario->turno}}</td>
                                     <td class="text-right ">
+                                        <a href="{{url('horarios/'.$horario->id)}}">
+                                            <button class="btn btn-secondary">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </a>
                                         <button type="button" class="btn btn-danger" onclick="modalEliminar('{{$horario -> nombre}}', '{{url('horarios/'.$horario -> id)}}')">
                                             <i class="fa fa-times"></i>
                                         </button>

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Horario extends Model
 {
-    protected $table = 'cliente';
+    protected $table = 'horario';
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
@@ -14,4 +14,8 @@ class Horario extends Model
         'turno',
         'visible'
     ];
+
+    public function dias(){
+        return $this->hasMany(Dia::class);
+    }
 }

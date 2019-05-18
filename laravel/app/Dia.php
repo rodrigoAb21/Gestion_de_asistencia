@@ -13,7 +13,6 @@ class Dia extends Model
         'horario_id',
         'nombre',
         'entrada',
-        'salida',
-        'visible',
+        'salida'
     ];
 }

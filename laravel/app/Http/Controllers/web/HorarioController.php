@@ -40,6 +40,7 @@ class HorarioController extends Controller
      */
     public function store(Request $request)
     {
+
         try{
 
             DB::beginTransaction();
@@ -60,6 +61,7 @@ class HorarioController extends Controller
                 $dia->nombre = $nombres[$cont];
                 $dia->entrada = $entradas[$cont];
                 $dia->salida = $salidas[$cont];
+                $dia->horario_id = $horario->id;
                 $dia->save();
 
                 $cont++;
@@ -84,7 +86,7 @@ class HorarioController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('vistas.horarios.show', ['horario'=> Horario::findOrFail($id)]);
     }
 
     /**
