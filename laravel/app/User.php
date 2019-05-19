@@ -37,4 +37,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function a_horarios(){
+        return $this->hasMany(Asignacion_Horarios::class, 'user_id');
+    }
 }
