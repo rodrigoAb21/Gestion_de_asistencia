@@ -55,7 +55,7 @@ class UbicacionController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('vistas.ubicaciones.show',['ubicacion' => Ubicacion::findOrFail($id)]);
     }
 
     /**

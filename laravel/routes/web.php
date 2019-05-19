@@ -35,10 +35,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('asignaciones}/horarios/{id}/eliminar/{id_horario}', 'web\AsignacionController@quitarHorario');
 
     // Clientes
-    Route::get('asignaciones/clientes/{id}', 'web\AsignacionController@verClientes');
     Route::get('asignaciones/clientes/{id}/editar', 'web\AsignacionController@editarCliente');
     Route::post('asignaciones/clientes/{id}/asignar', 'web\AsignacionController@asignarCliente');
-    Route::delete('asignaciones}/clientes/{id}/eliminar/{id_horario}', 'web\AsignacionController@quitarCliente');
+    Route::delete('asignaciones/clientes/{id}/eliminar/{id_horario}', 'web\AsignacionController@quitarCliente');
+    Route::get('asignaciones/clientes/{id}/{cliente_id}', 'web\AsignacionController@verCliente');
 
     // Ubicaiones
     Route::get('asignaciones/ubicacion/{id}', 'web\AsignacionController@verUbicacion');

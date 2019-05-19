@@ -55,7 +55,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('vistas.clientes.show',['cliente' => Cliente::findOrFail($id)]);
     }
 
     /**

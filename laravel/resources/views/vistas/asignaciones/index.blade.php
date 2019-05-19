@@ -35,7 +35,7 @@
                                                 <i class="fa fa-building"></i>
                                             </button>
                                         </a>
-                                        <a href="{{url('empleados/'.$empleado->id.'/edit')}}">
+                                        <a href="{{url('asignaciones/clientes/'.$empleado->id.'/editar')}}">
                                             <button class="btn btn-warning">
                                                 <i class="fa fa-user-tie"></i>
                                             </button>

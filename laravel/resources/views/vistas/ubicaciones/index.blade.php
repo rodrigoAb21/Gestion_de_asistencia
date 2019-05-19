@@ -31,6 +31,11 @@
                                     <td>{{$ubicacion -> direccion}}</td>
                                     <td>{{$ubicacion -> telefono}}</td>
                                     <td class="text-right ">
+                                        <a href="{{url('ubicaciones/'.$ubicacion->id)}}">
+                                            <button class="btn btn-success">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </a>
                                         <a href="{{url('ubicaciones/'.$ubicacion->id.'/edit')}}">
                                             <button class="btn btn-warning">
                                                 <i class="fa fa-pen"></i>

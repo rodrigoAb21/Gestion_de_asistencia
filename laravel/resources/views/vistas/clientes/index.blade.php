@@ -31,6 +31,11 @@
                                     <td>{{$cliente -> direccion}}</td>
                                     <td>{{$cliente -> telefono}}</td>
                                     <td class="text-right ">
+                                        <a href="{{url('clientes/'.$cliente->id)}}">
+                                            <button class="btn btn-success">
+                                                <i class="fa fa-eye"></i>
+                                            </button>
+                                        </a>
                                         <a href="{{url('clientes/'.$cliente->id.'/edit')}}">
                                             <button class="btn btn-warning">
                                                 <i class="fa fa-pen"></i>

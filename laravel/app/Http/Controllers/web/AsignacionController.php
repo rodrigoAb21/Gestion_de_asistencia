@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\web;
 
+use App\Asignacion_Clientes;
 use App\Asignacion_Horarios;
+use App\Cliente;
 use App\Ubicacion;
 use App\User;
 use Illuminate\Http\Request;
@@ -22,6 +24,8 @@ class AsignacionController extends Controller
             ->paginate(5);
         return view('vistas.asignaciones.index', ['empleados' => $empleados]);
     }
+
+    // --------------------- ASIGNACION DE HORARIOS ---------------------------------
 
     // Muestra los horarios
     public function verHorarios($id)
@@ -44,8 +48,6 @@ class AsignacionController extends Controller
             ->where('a_horarios.user_id', '=', $id)
             ->select('a_horarios.id', 'horario.id as horario_id', 'horario.nombre', 'horario.turno')
             ->get();
-
-//        $horarios = Horario::where('visible','=', true)->get();
 
         $horarios = DB::table('horario')
             ->where('horario.visible', '=', true)
@@ -81,14 +83,60 @@ class AsignacionController extends Controller
         return redirect('asignaciones/horarios/'.$id.'/editar');
     }
 
-    //
-    public function verClientes($id){}
+    // --------------------- ASIGNACION DE CLIENTES ---------------------------------
 
-    public function editarCliente($id){}
+    // ver cliente
+    public function verCliente($id){
+        return view('vistas.clientes.show',['cliente' => Cliente::findOrFail($id)]);
+    }
 
-    public function asignarCliente($id, Request $request){}
 
-    public function quitarCliente($id, $asignacion_id){}
+    // Ver Asignaciones del empleado
+    public function editarCliente($id){
+        $empleado = User::findOrfail($id);
+        $asignados = Asignacion_Clientes::with('cliente')
+            ->where('user_id', '=', $id)
+            ->get();
+
+
+        $clientes = DB::table('cliente')
+            ->where('cliente.visible', '=', true)
+            ->whereNotIn('cliente.id', function($query) use ($id) {
+                $query->from('a_clientes')
+                    ->select('cliente_id')
+                    ->where('user_id','=', $id)
+                    ->get();
+            }
+            )
+            ->select('cliente.id', 'cliente.nombre')
+            ->orderBy('cliente.id')
+            ->get();
+
+
+
+
+        return view('vistas.asignaciones.asignacion_clientes', ['empleado' => $empleado, 'asignados' => $asignados, 'clientes' => $clientes]);
+    }
+
+    public function asignarCliente($id, Request $request){
+        $asignacion = new Asignacion_Clientes();
+        $asignacion->cliente_id = $request->cliente_id;
+        $asignacion->user_id = $id;
+        $asignacion->save();
+
+        return redirect('asignaciones/clientes/'.$id.'/editar');
+    }
+
+    public function quitarCliente($id, $asignacion_id){
+        $asignacion = Asignacion_Clientes::findOrFail($asignacion_id);
+        $asignacion->delete();
+
+        return redirect('asignaciones/clientes/'.$id.'/editar');
+    }
+
+
+
+    // ------------------------------------ASIGNACIONES UBICACIONES ---------------------------------
 
     public function verUbicacion($id){
         $empleado = User::findOrFail($id);
