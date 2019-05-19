@@ -23,4 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('clientes', 'web\ClienteController');
     Route::resource('horarios', 'web\HorarioController');
     Route::resource('empleados', 'web\EmpleadoController');
+    Route::get('empleados/horarios/{id}', 'web\AsignacionController@horariosAsignados');
+    Route::get('empleados/horarios/{id}/editar', 'web\AsignacionController@editarHorario');
+    Route::post('empleados/horarios/{id}/asignar', 'web\AsignacionController@asignarHorario');
+    Route::delete('empleados/horarios/{id}/eliminar/{id_horario}', 'web\AsignacionController@quitarHorario');
 });

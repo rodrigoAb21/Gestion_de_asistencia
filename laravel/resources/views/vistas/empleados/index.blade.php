@@ -31,6 +31,11 @@
                                     <td>{{$empleado -> rol}}</td>
                                     <td>{{$empleado -> ubicacion}}</td>
                                     <td class="text-right ">
+                                        <a href="{{url('empleados/horarios/'.$empleado->id)}}">
+                                            <button class="btn btn-info">
+                                                <i class="fa fa-calendar-alt"></i>
+                                            </button>
+                                        </a>
                                         <a href="{{url('empleados/'.$empleado->id)}}">
                                             <button class="btn btn-secondary">
                                                 <i class="fa fa-eye"></i>
