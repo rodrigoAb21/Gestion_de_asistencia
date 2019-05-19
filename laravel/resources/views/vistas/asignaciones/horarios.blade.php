@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <h2 class="pb-2">Ver Horarios Asignados: {{$empleado->nombre}}
                         <div class="float-right">
-                            <a class="btn btn-success" href="{{url('empleados/horarios/'.$empleado->id.'/editar')}}">
+                            <a class="btn btn-success" href="{{url('asignaciones/horarios/'.$empleado->id.'/editar')}}">
                                 <i class="fa fa-pen"></i> Editar
                             </a>
                         </div>

@@ -23,8 +23,24 @@ Route::middleware('auth')->group(function () {
     Route::resource('clientes', 'web\ClienteController');
     Route::resource('horarios', 'web\HorarioController');
     Route::resource('empleados', 'web\EmpleadoController');
-    Route::get('empleados/horarios/{id}', 'web\AsignacionController@verHorarios');
-    Route::get('empleados/horarios/{id}/editar', 'web\AsignacionController@editarHorario');
-    Route::post('empleados/horarios/{id}/asignar', 'web\AsignacionController@asignarHorario');
-    Route::delete('empleados/horarios/{id}/eliminar/{id_horario}', 'web\AsignacionController@quitarHorario');
+
+
+    // Asignaciones
+    Route::get('asignaciones', 'web\AsignacionController@principal');
+
+    // Horarios
+    Route::get('asignaciones/horarios/{id}', 'web\AsignacionController@verHorarios');
+    Route::get('asignaciones/horarios/{id}/editar', 'web\AsignacionController@editarHorario');
+    Route::post('asignaciones/horarios/{id}/asignar', 'web\AsignacionController@asignarHorario');
+    Route::delete('asignaciones}/horarios/{id}/eliminar/{id_horario}', 'web\AsignacionController@quitarHorario');
+
+    // Clientes
+    Route::get('asignaciones/clientes/{id}', 'web\AsignacionController@verClientes');
+    Route::get('asignaciones/clientes/{id}/editar', 'web\AsignacionController@editarCliente');
+    Route::post('asignaciones/clientes/{id}/asignar', 'web\AsignacionController@asignarCliente');
+    Route::delete('asignaciones}/clientes/{id}/eliminar/{id_horario}', 'web\AsignacionController@quitarCliente');
+
+    // Ubicaiones
+    Route::get('asignaciones/ubicacion/{id}', 'web\AsignacionController@verUbicacion');
+    Route::patch('asignaciones/ubicacion/{id}/asignar', 'web\AsignacionController@asignarUbicacion');
 });

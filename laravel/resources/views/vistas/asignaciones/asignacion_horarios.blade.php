@@ -6,7 +6,7 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="pb-2"> Horarios Asignados: {{$empleado->nombre}}</h2>
-                    <form method="POST" action="{{url('empleados/horarios/'.$empleado->id.'/asignar')}}" autocomplete="off" >
+                    <form method="POST" action="{{url('asignaciones/horarios/'.$empleado->id.'/asignar')}}" autocomplete="off" >
                         {{csrf_field()}}
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -40,7 +40,7 @@
                                     <td>{{$asignado->nombre}}</td>
                                     <td>{{$asignado->turno}}</td>
                                     <td class="text-right ">
-                                        <button type="button" class="btn btn-danger" onclick="modalEliminar('{{$asignado -> nombre}}', '{{url('empleados/horarios/'.$empleado->id.'/eliminar/'.$asignado -> id)}}')">
+                                        <button type="button" class="btn btn-danger" onclick="modalEliminar('{{$asignado -> nombre}}', '{{url('asignaciones/horarios/'.$empleado->id.'/eliminar/'.$asignado -> id)}}')">
                                             <i class="fa fa-times"></i>
                                         </button>
                                     </td>
@@ -49,7 +49,7 @@
                             </tbody>
                         </table>
                         <br>
-                        <a href="{{url('empleados/horarios/'.$empleado->id)}}">
+                        <a href="{{url('asignaciones/horarios/'.$empleado->id)}}">
                             <button class="btn btn-warning">
                                 <i class="fa fa-arrow-left"></i> Atras
                             </button>

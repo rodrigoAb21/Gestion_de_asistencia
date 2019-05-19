@@ -5,13 +5,7 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h3 class="pb-2">Gestionar Empleados
-                        <div class="float-right">
-                            <a class="btn btn-success" href="{{url('empleados/create')}}">
-                                <i class="fa fa-plus"></i> Nuevo
-                            </a>
-                        </div>
-                    </h3>
+                    <h3 class="pb-2">Asignaciones</h3>
                     <div class="table-responsive">
                         <table class="table table-hover table-bordered color-table info-table">
                             <thead>
@@ -31,19 +25,21 @@
                                     <td>{{$empleado -> rol}}</td>
                                     <td>{{$empleado -> ubicacion}}</td>
                                     <td class="text-right ">
-                                        <a href="{{url('empleados/'.$empleado->id)}}">
-                                            <button class="btn btn-secondary">
-                                                <i class="fa fa-eye"></i>
+                                        <a href="{{url('asignaciones/horarios/'.$empleado->id)}}">
+                                            <button class="btn btn-info">
+                                                <i class="fa fa-calendar-alt"></i>
+                                            </button>
+                                        </a>
+                                        <a href="{{url('asignaciones/ubicacion/'.$empleado->id)}}">
+                                            <button class="btn btn-success">
+                                                <i class="fa fa-building"></i>
                                             </button>
                                         </a>
                                         <a href="{{url('empleados/'.$empleado->id.'/edit')}}">
                                             <button class="btn btn-warning">
-                                                <i class="fa fa-pen"></i>
+                                                <i class="fa fa-user-tie"></i>
                                             </button>
                                         </a>
-                                        <button type="button" class="btn btn-danger" onclick="modalEliminar('{{$empleado -> nombre}}', '{{url('empleados/'.$empleado -> id)}}')">
-                                            <i class="fa fa-times"></i>
-                                        </button>
                                     </td>
                                 </tr>
                             @endforeach
@@ -55,19 +51,5 @@
             </div>
         </div>
     </div>
-    @include('vistas.modal')
-    @push('scripts')
-        <script>
-
-            function modalEliminar(nombre, url) {
-                $('#modalEliminarForm').attr("action", url);
-                $('#metodo').val("delete");
-                $('#modalEliminarTitulo').html("Eliminar Empleado");
-                $('#modalEliminarEnunciado').html("Realmente desea eliminar al empleado: " + nombre + "?");
-                $('#modalEliminar').modal('show');
-            }
-
-        </script>
-
-    @endpush()
 @endsection
+

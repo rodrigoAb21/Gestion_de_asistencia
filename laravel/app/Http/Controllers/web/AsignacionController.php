@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\web;
 
 use App\Asignacion_Horarios;
-use App\Horario;
+use App\Ubicacion;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\DB;
 
 class AsignacionController extends Controller
 {
+
+    public function principal()
+    {
+        $empleados = DB::table('users')
+            ->join('rol', 'users.rol_id','=', 'rol.id')
+            ->join('ubicacion', 'users.ubicacion_id','=', 'ubicacion.id')
+            ->where('users.visible','=', true)
+            ->select('users.id', 'users.nombre', 'rol.nombre as rol', 'ubicacion.nombre as ubicacion')
+            ->paginate(5);
+        return view('vistas.asignaciones.index', ['empleados' => $empleados]);
+    }
 
     // Muestra los horarios
     public function verHorarios($id)
@@ -59,7 +70,7 @@ class AsignacionController extends Controller
         $asignacion->user_id = $id;
         $asignacion->save();
 
-        return redirect('/empleados/horarios/'.$id.'/editar');
+        return redirect('asignaciones/horarios/'.$id.'/editar');
     }
 
     // Eliminar una asignacion
@@ -67,6 +78,35 @@ class AsignacionController extends Controller
         $asignacion = Asignacion_Horarios::findOrFail($asignacion_id);
         $asignacion->delete();
 
-        return redirect('/empleados/horarios/'.$id.'/editar');
+        return redirect('asignaciones/horarios/'.$id.'/editar');
     }
+
+    //
+    public function verClientes($id){}
+
+    public function editarCliente($id){}
+
+    public function asignarCliente($id, Request $request){}
+
+    public function quitarCliente($id, $asignacion_id){}
+
+    public function verUbicacion($id){
+        $empleado = User::findOrFail($id);
+        $ubicacion = Ubicacion::findOrFail($empleado->ubicacion_id);
+        $ubicaciones = Ubicacion::where('id', '!=', $empleado->ubicacion_id)
+            ->where('visible', '=', true)
+            ->get();
+        return view('vistas.asignaciones.ubicacion', ['empleado' => $empleado, 'ubicacion' => $ubicacion, 'ubicaciones' => $ubicaciones]);
+    }
+
+    public function asignarUbicacion($id, Request $request){
+        $empleado = User::findOrFail($id);
+        $empleado->ubicacion_id = $request['ubicacion_id'];
+        $empleado->save();
+
+        return redirect('asignaciones/ubicacion/'.$id);
+    }
+
+
+
 }
