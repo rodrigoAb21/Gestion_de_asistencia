@@ -17,7 +17,7 @@ class HorarioController extends Controller
      */
     public function index()
     {
-        return view('vistas.horarios.index', ['horarios' => Horario::where('visible', '=', true)->paginate(5)]);
+        return view('vistas.horarios.index', ['horarios' => Horario::orderBy('id')->where('visible', '=', true)->paginate(5)]);
     }
 
     /**

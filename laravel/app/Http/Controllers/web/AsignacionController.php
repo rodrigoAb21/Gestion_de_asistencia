@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\DB;
 
 class AsignacionController extends Controller
 {
+
+    // Muestra los horarios
     public function verHorarios($id)
     {
 
@@ -23,6 +25,7 @@ class AsignacionController extends Controller
 
     }
 
+    // Redirige a la vista de asignacion de horarios
     public function editarHorario($id){
         $empleado = User::findOrFail($id);
         $asignados = DB::table('a_horarios')
@@ -30,11 +33,26 @@ class AsignacionController extends Controller
             ->where('a_horarios.user_id', '=', $id)
             ->select('a_horarios.id', 'horario.id as horario_id', 'horario.nombre', 'horario.turno')
             ->get();
-        $horarios = Horario::where('visible','=', true)->get();
+
+//        $horarios = Horario::where('visible','=', true)->get();
+
+        $horarios = DB::table('horario')
+            ->where('horario.visible', '=', true)
+            ->whereNotIn('horario.id', function($query) use ($id) {
+                    $query->from('a_horarios')
+                    ->select('horario_id')
+                    ->where('user_id','=', $id)
+                    ->get();
+                }
+            )
+            ->select('horario.id', 'horario.nombre', 'horario.turno')
+            ->orderBy('horario.id')
+            ->get();
 
         return view('vistas.asignaciones.asignacion_horarios', ['empleado' => $empleado, 'asignados' => $asignados, 'horarios' => $horarios]);
     }
 
+    // Guarda una nueva asignacion
     public function asignarHorario($id, Request $request){
         $asignacion = new Asignacion_Horarios();
         $asignacion->horario_id = $request->horario_id;
@@ -44,6 +62,7 @@ class AsignacionController extends Controller
         return redirect('/empleados/horarios/'.$id.'/editar');
     }
 
+    // Eliminar una asignacion
     public function quitarHorario($id, $asignacion_id){
         $asignacion = Asignacion_Horarios::findOrFail($asignacion_id);
         $asignacion->delete();

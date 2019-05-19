@@ -48,6 +48,12 @@
                             @endforeach
                             </tbody>
                         </table>
+                        <br>
+                        <a href="{{url('empleados/horarios/'.$empleado->id)}}">
+                            <button class="btn btn-warning">
+                                <i class="fa fa-arrow-left"></i> Atras
+                            </button>
+                        </a>
                     </div>
                 </div>
             </div>
