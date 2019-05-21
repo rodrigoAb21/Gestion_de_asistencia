@@ -156,5 +156,19 @@ class AsignacionController extends Controller
     }
 
 
+    // ************************************* FUNCIONCITAS **********************************************
+
+    public function fueraRango($entrada, $salida, $hora){
+        return ($hora < $entrada && $hora > $salida);
+    }
+
+    public function prueba(){
+
+        $actual = new \stdClass();
+        $actual->dias = 'nada';
+
+
+        dd(json_encode($actual));
+    }
 
 }
