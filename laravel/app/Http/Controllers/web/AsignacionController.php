@@ -5,6 +5,7 @@ namespace App\Http\Controllers\web;
 use App\Asignacion_Clientes;
 use App\Asignacion_Horarios;
 use App\Cliente;
+use App\Dia;
 use App\Ubicacion;
 use App\User;
 use Illuminate\Http\Request;
@@ -158,14 +159,56 @@ class AsignacionController extends Controller
 
     // ************************************* FUNCIONCITAS **********************************************
 
-    public function fueraRango($entrada, $salida, $hora){
-        return ($hora < $entrada && $hora > $salida);
+    public function fueraRango($e_1, $s_1, $e_2, $s_2){
+        // Convirtiendo a entero
+        $e_1 = str_replace(':', '', $e_1);
+        $e_2 = str_replace(':', '', $e_2);
+        $s_1 = str_replace(':', '', $s_1);
+        $s_2 = str_replace(':', '', $s_2);
+
+        return ($e_1 < $e_2 && $e_1 > $s_2) && ($s_1 < $e_2 && $s_1 > $s_2);
     }
 
     public function prueba(){
 
         $actual = new \stdClass();
-        $actual->dias = 'nada';
+        $actual->lunes = array();
+        $actual->martes = array();
+        $actual->miercoles = array();
+        $actual->jueves = array();
+        $actual->viernes = array();
+        $actual->sabado = array();
+        $actual->domingo = array();
+
+        $horarios = Asignacion_Horarios::where('user_id', '=', 1)->get();
+        foreach ($horarios as $horario){
+            $dias = Dia::where('horario_id','=', $horario->horario_id)->get();
+            foreach ($dias as $dia){
+                switch ($dia->nombre) {
+                    case 'Lunes':
+                        $actual->lunes[] = $dia;
+                        break;
+                    case 'Martes':
+                        $actual->martes[] = $dia;
+                        break;
+                    case 'Miercoles':
+                        $actual->miercoles[] = $dia;
+                        break;
+                    case 'Jueves':
+                        $actual->jueves[] = $dia;
+                        break;
+                    case 'Viernes':
+                        $actual->viernes[] = $dia;
+                        break;
+                    case 'Sabado':
+                        $actual->sabado[] = $dia;
+                        break;
+                    case 'Domingo':
+                        $actual->domingo[] = $dia;
+                        break;
+                }
+            }
+        }
 
 
         dd(json_encode($actual));
