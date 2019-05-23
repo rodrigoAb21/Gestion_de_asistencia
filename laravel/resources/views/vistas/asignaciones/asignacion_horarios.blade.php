@@ -3,6 +3,14 @@
 @section('contenido')
     <div class="row pt-3">
         <div class="col-12">
+            <div class="flash-message">
+                @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+                    @if(Session::has('alert-' . $msg))
+
+                        <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>
+                    @endif
+                @endforeach
+            </div> <!-- end .flash-message -->
             <div class="card">
                 <div class="card-body">
                     <h2 class="pb-2"> Horarios Asignados: {{$empleado->nombre}}</h2>

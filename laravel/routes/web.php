@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('asignaciones/horarios/{id}', 'web\AsignacionController@verHorarios');
     Route::get('asignaciones/horarios/{id}/editar', 'web\AsignacionController@editarHorario');
     Route::post('asignaciones/horarios/{id}/asignar', 'web\AsignacionController@asignarHorario');
-    Route::delete('asignaciones}/horarios/{id}/eliminar/{id_horario}', 'web\AsignacionController@quitarHorario');
+    Route::delete('asignaciones/horarios/{id}/eliminar/{id_horario}', 'web\AsignacionController@quitarHorario');
 
     // Clientes
     Route::get('asignaciones/clientes/{id}/editar', 'web\AsignacionController@editarCliente');
@@ -46,4 +46,3 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('pruebas', 'web\AsignacionController@prueba');
