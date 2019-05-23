@@ -63,7 +63,8 @@ class AsignacionController extends Controller
             ->orderBy('horario.id')
             ->get();
 
-        return view('vistas.asignaciones.asignacion_horarios', ['empleado' => $empleado, 'asignados' => $asignados, 'horarios' => $horarios]);
+        return view('vistas.asignaciones.asignacion_horarios', ['empleado' => $empleado, 'asignados' => $asignados,
+            'horarios' => $horarios]);
     }
 
     // Guarda una nueva asignacion
@@ -123,7 +124,8 @@ class AsignacionController extends Controller
 
 
 
-        return view('vistas.asignaciones.asignacion_clientes', ['empleado' => $empleado, 'asignados' => $asignados, 'clientes' => $clientes]);
+        return view('vistas.asignaciones.asignacion_clientes', ['empleado' => $empleado, 'asignados' => $asignados,
+            'clientes' => $clientes]);
     }
 
     public function asignarCliente($id, Request $request){
@@ -152,7 +154,8 @@ class AsignacionController extends Controller
         $ubicaciones = Ubicacion::where('id', '!=', $empleado->ubicacion_id)
             ->where('visible', '=', true)
             ->get();
-        return view('vistas.asignaciones.ubicacion', ['empleado' => $empleado, 'ubicacion' => $ubicacion, 'ubicaciones' => $ubicaciones]);
+        return view('vistas.asignaciones.ubicacion', ['empleado' => $empleado, 'ubicacion' => $ubicacion,
+            'ubicaciones' => $ubicaciones]);
     }
 
     public function asignarUbicacion($id, Request $request){

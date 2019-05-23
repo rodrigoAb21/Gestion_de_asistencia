@@ -121,8 +121,7 @@ class HorarioController extends Controller
     public function destroy($id)
     {
         $horario = Horario::findOrFail($id);
-        $horario->visible = false;
-        $horario->save();
+        $horario->delete();
 
         return redirect('horarios');
     }
