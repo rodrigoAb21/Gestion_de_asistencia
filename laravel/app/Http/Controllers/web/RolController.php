@@ -15,7 +15,7 @@ class RolController extends Controller
      */
     public function index()
     {
-        return view('vistas.roles.index', ['roles' => Rol::where('visible','=',true)->paginate(5)]);
+        return view('vistas.roles.index', ['roles' => Rol::where('visible','=',true)->where('id','!=',1)->paginate(5)]);
     }
 
     /**

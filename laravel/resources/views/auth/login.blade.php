@@ -32,7 +32,7 @@
     <!-- Main wrapper - style you can find in pages.scss -->
     <!-- ============================================================== -->
     <section id="wrapper">
-        <div class="login-register" style="background-image:url({{asset('plantilla/assets/images/background/login-register.jpg')}});">
+        <div class="login-register">
             <div class="login-box card">
             <div class="card-body">
                 <form class="form-horizontal form-material" id="loginform" method="POST" action="{{ route('login') }}" autocomplete="off">
