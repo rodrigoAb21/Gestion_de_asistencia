@@ -44,5 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('asignaciones/ubicacion/{id}', 'web\AsignacionController@verUbicacion');
     Route::patch('asignaciones/ubicacion/{id}/asignar', 'web\AsignacionController@asignarUbicacion');
 
+    // Reportes
+    Route::get('reportes/prueba', 'web\ReporteController@sumar');
+
 });
 
