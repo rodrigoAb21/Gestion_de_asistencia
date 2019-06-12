@@ -52,6 +52,14 @@
                     </div>
                 </div>
 
+                <div class="card text-center p-3" >
+                    <div class="card-body">
+                        <h4 class="card-title">Generar Reportes</h4>
+                        <p class="card-text"><i class="fa fa-file-pdf fa-3x"></i></p>
+                        <a class="btn btn-info btn-block" href="{{url('reportes')}}"> Ver </a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

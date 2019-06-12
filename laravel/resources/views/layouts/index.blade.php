@@ -143,6 +143,12 @@
                                 <span class="hide-menu"> Gest. Ubicaciones</span>
                             </a>
                         </li>
+                        <li class="{{ Request::is('reportes*') ? 'nav-item active' : 'nav-item' }}">
+                            <a href="{{url('reportes')}}" >
+                                <i class="fa fa-file-pdf"></i>
+                                <span class="hide-menu"> Generar Reportes</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

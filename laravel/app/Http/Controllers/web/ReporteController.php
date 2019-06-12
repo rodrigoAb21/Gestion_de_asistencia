@@ -11,6 +11,10 @@ use App\Http\Controllers\Controller;
 class ReporteController extends Controller
 {
 
+    public function index(){
+        return view('vistas.reportes.index');
+    }
+
 
     public function getReporte(Request $request){
         $tuplas = array();
@@ -18,7 +22,7 @@ class ReporteController extends Controller
         foreach ($empleados as $empleado){
             $tuplas[] = $this->makeTupla($empleado->nombre,$this->totalTrabajo($empleado->id, $request->mes, $request->anio), "00:00", "00:00", "00:00");
         }
-        return $tuplas;
+        return view('vistas.reportes.reporte', ['tuplas' => $tuplas, 'mes' => $request->mes, 'anio' => $request->anio]);
     }
 
     public function totalTrabajo($user_id, $month, $year){
@@ -61,10 +65,12 @@ class ReporteController extends Controller
             $min = $min - 60;
         }
 
-        $hora = ''.$hora;
-        $min = ''.$min;
-        if (count_chars($min)!=2){
+        if ($min < 10){
             $min = '0'.$min;
+        }
+
+        if ($hora < 10){
+            $hora = '0'.$hora;
         }
 
         return $hora.':'.$min;
