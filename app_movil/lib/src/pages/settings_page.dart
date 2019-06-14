@@ -11,7 +11,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Preferencias'),
         centerTitle: true,
-        backgroundColor: Colors.blueGrey[900],
+        backgroundColor: Colors.blue,
       ),
       drawer: MenuWidget(),
       body: Column(

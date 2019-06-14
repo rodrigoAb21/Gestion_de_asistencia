@@ -16,13 +16,13 @@ class MenuWidget extends StatelessWidget {
             child: Container(),
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/menu-img.png'),
+                image: AssetImage('assets/menu-img.jpg'),
                 fit: BoxFit.cover
               )
             ),
           ),
           ListTile(
-            leading: Icon(Icons.home, color: Colors.blueGrey[900],),
+            leading: Icon(Icons.home, color: Colors.blue,),
             title: Text('Principal'),
             onTap: (){
               Navigator.pushReplacementNamed(context, HomePage.routeName);
@@ -30,25 +30,25 @@ class MenuWidget extends StatelessWidget {
           ), 
           Divider(),
           ListTile(
-            leading: Icon(Icons.account_box, color: Colors.blueGrey[900],),
+            leading: Icon(Icons.account_box, color: Colors.blue,),
             title: Text('Cuenta'),
             onTap: (){},
           ), 
           Divider(),
           ListTile(
-            leading: Icon(Icons.subdirectory_arrow_right, color: Colors.blueGrey[900],),
+            leading: Icon(Icons.subdirectory_arrow_right, color: Colors.blue,),
             title: Text('Asignaciones'),
             onTap: (){},
           ), 
           Divider(),
           ListTile(
-            leading: Icon(Icons.alarm_on, color: Colors.blueGrey[900],),
+            leading: Icon(Icons.alarm_on, color: Colors.blue,),
             title: Text('Horarios'),
             onTap: (){},
           ), 
           Divider(),
           ListTile(
-            leading: Icon(Icons.settings, color: Colors.blueGrey[900],),
+            leading: Icon(Icons.settings, color: Colors.blue,),
             title: Text('Configuraciones'),
             onTap: (){
               Navigator.pushReplacementNamed(context, SettingsPage.routeName);
@@ -56,7 +56,7 @@ class MenuWidget extends StatelessWidget {
           ), 
           Divider(),
           ListTile(
-            leading: Icon(Icons.exit_to_app, color: Colors.blueGrey[900],),
+            leading: Icon(Icons.exit_to_app, color: Colors.blue,),
             title: Text('Log out'),
             onTap: (){
               //enviar logout             

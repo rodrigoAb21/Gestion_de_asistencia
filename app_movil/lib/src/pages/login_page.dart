@@ -22,7 +22,7 @@ class _LoginPageState extends State<LoginPage> {
       appBar: AppBar(
         title: Text('LOGIN'),
         centerTitle: true,
-        backgroundColor: Colors.blueGrey[900],
+        backgroundColor: Colors.blue,
       ),
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
             onPressed: (){
               _enviar();
             },
-            color: Colors.blueGrey[900],
+            color: Colors.blue,
             textColor: Colors.white,
           )
         ],
