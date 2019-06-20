@@ -1,6 +1,7 @@
 import 'package:app_movil/src/pages/home_page.dart';
 import 'package:app_movil/src/pages/login_page.dart';
 import 'package:app_movil/src/pages/settings_page.dart';
+import 'package:app_movil/src/pages/ubicacion_page.dart';
 import 'package:app_movil/src/util/preferencias_usuario.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -37,8 +38,10 @@ class MenuWidget extends StatelessWidget {
           Divider(),
           ListTile(
             leading: Icon(Icons.subdirectory_arrow_right, color: Colors.blue,),
-            title: Text('Asignaciones'),
-            onTap: (){},
+            title: Text('Ubicacion'),
+            onTap: (){
+              Navigator.pushReplacementNamed(context, UbicacionPage.routeName);
+            },
           ), 
           Divider(),
           ListTile(
