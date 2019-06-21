@@ -121,9 +121,6 @@ class AsignacionController extends Controller
             ->orderBy('cliente.id')
             ->get();
 
-
-
-
         return view('vistas.asignaciones.asignacion_clientes', ['empleado' => $empleado, 'asignados' => $asignados,
             'clientes' => $clientes]);
     }
