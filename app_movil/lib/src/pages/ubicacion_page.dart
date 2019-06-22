@@ -1,3 +1,4 @@
+import 'package:app_movil/src/models/ubicacion_model.dart';
 import 'package:app_movil/src/widgets/menu_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -13,6 +14,10 @@ class UbicacionPage extends StatefulWidget {
 class _UbicacionPageState extends State<UbicacionPage> {
  @override
   Widget build(BuildContext context) {
+    
+    final Ubicacion args = ModalRoute.of(context).settings.arguments;
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Ubicacion'),
@@ -23,22 +28,21 @@ class _UbicacionPageState extends State<UbicacionPage> {
       body: Container(
         child: ListView(
           children: <Widget>[
-            //_mapa(context),
-            Container(color: Colors.blue,height: MediaQuery.of(context).size.height/1.85,
-              width: double.infinity),
+            _mapa(context, args),
+            //Container(color: Colors.blue,height: MediaQuery.of(context).size.height/1.85,width: double.infinity),
             SizedBox(height: 10.0),
             // detalle
             ListTile(
               title: Text("Nombre"),
-              subtitle: Text("Inquifarmed"),
+              subtitle: Text(args.nombre),
             ),
             ListTile(
               title: Text("Direccion"),
-              subtitle: Text("Radial 17 1/2, 6to anillo frente al complejo Oriente Petrolero, # 3354"),
+              subtitle: Text(args.direccion),
             ),
             ListTile(
               title: Text("Telefono"),
-              subtitle: Text("3532125"),
+              subtitle: Text(args.telefono),
             ),
           ],
         ),
@@ -49,13 +53,13 @@ class _UbicacionPageState extends State<UbicacionPage> {
   
 
 
-  Widget _mapa(BuildContext context){
+  Widget _mapa(BuildContext context, Ubicacion args){
     return new Container(
-              height: MediaQuery.of(context).size.height/2.5,
+              height: MediaQuery.of(context).size.height/1.85,
               width: double.infinity,
               child: new FlutterMap(
                 options: new MapOptions(
-                center: new LatLng(-17.821926, -63.229354),
+                center: new LatLng(args.latitud, args.longitud),
                 zoom: 18.0),
                 layers: [
               new TileLayerOptions(
@@ -66,7 +70,7 @@ class _UbicacionPageState extends State<UbicacionPage> {
                 new Marker(
                     width: 45.0,
                     height: 45.0,
-                    point: new LatLng(-17.821926, -63.229354),
+                    point: new LatLng(args.latitud, args.longitud),
                     builder: (context) => new Container(
                           child: IconButton(
                             icon: Icon(Icons.location_on),

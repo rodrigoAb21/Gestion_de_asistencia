@@ -1,4 +1,5 @@
 import 'package:app_movil/src/pages/home_page.dart';
+import 'package:app_movil/src/pages/listaClientes_page.dart';
 import 'package:app_movil/src/pages/login_page.dart';
 import 'package:app_movil/src/pages/settings_page.dart';
 import 'package:app_movil/src/pages/ubicacion_page.dart';
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
         LoginPage.routeName : ( BuildContext context ) => LoginPage(),
         SettingsPage.routeName : ( BuildContext context ) => SettingsPage(),
         UbicacionPage.routeName : ( BuildContext context ) => UbicacionPage(),
+        ListaClientesPage.routeName : ( BuildContext context ) => ListaClientesPage(),
       },
     );
   }

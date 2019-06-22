@@ -1,8 +1,11 @@
+import 'package:app_movil/src/models/ubicacion_model.dart';
 import 'package:app_movil/src/pages/home_page.dart';
+import 'package:app_movil/src/pages/listaClientes_page.dart';
 import 'package:app_movil/src/pages/login_page.dart';
 import 'package:app_movil/src/pages/settings_page.dart';
 import 'package:app_movil/src/pages/ubicacion_page.dart';
 import 'package:app_movil/src/util/preferencias_usuario.dart';
+import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -34,13 +37,21 @@ class MenuWidget extends StatelessWidget {
             leading: Icon(Icons.account_box, color: Colors.blue,),
             title: Text('Cuenta'),
             onTap: (){},
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.business, color: Colors.blue,),
+            title: Text('Ubicacion'),
+            onTap: (){
+              _getUbicacion(context);
+            },
           ), 
           Divider(),
           ListTile(
-            leading: Icon(Icons.subdirectory_arrow_right, color: Colors.blue,),
-            title: Text('Ubicacion'),
+            leading: Icon(Icons.group, color: Colors.blue,),
+            title: Text('Clientes'),
             onTap: (){
-              Navigator.pushReplacementNamed(context, UbicacionPage.routeName);
+              Navigator.pushReplacementNamed(context, ListaClientesPage.routeName);
             },
           ), 
           Divider(),
@@ -76,7 +87,7 @@ class MenuWidget extends StatelessWidget {
 
 
   _logout(BuildContext context) async {
-     final prefs = new PreferenciasUsuario();
+    final prefs = new PreferenciasUsuario();
     final resp = await http.post('http://testsoft.nl/api/logout', headers: {
       "Accept": "application/json",
       "Authorization": prefs.token}
@@ -88,6 +99,26 @@ class MenuWidget extends StatelessWidget {
       Navigator.pushReplacementNamed(context, LoginPage.routeName);
     }
 
+  }
+
+  _getUbicacion(BuildContext context) async {
+    final prefs = new PreferenciasUsuario();
+    final resp = await http.get('http://testsoft.nl/api/ubicacion', headers: {
+      "Accept": "application/json",
+      "Authorization": prefs.token}
+    );
+    if(resp.statusCode == 200){
+      var decodedResp = convert.jsonDecode(resp.body);
+      Navigator.pushReplacementNamed(
+        context, 
+        UbicacionPage.routeName,
+        arguments: Ubicacion(
+          decodedResp['nombre'], 
+          decodedResp['direccion'], 
+          decodedResp['telefono'], 
+          decodedResp['latitud'], 
+          decodedResp['longitud']));
+    }
   }
 
 }

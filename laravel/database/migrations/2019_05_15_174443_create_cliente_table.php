@@ -18,8 +18,8 @@ class CreateClienteTable extends Migration
             $table->string('nombre');
             $table->string('direccion');
             $table->string('telefono');
-            $table->string('latitud');
-            $table->string('longitud');
+            $table->double('latitud');
+            $table->double('longitud');
             $table->boolean('visible')->default(true);
         });
     }
