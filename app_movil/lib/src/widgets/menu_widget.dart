@@ -1,3 +1,4 @@
+import 'package:app_movil/src/models/cliente_model.dart';
 import 'package:app_movil/src/models/ubicacion_model.dart';
 import 'package:app_movil/src/pages/home_page.dart';
 import 'package:app_movil/src/pages/listaClientes_page.dart';
@@ -51,7 +52,7 @@ class MenuWidget extends StatelessWidget {
             leading: Icon(Icons.group, color: Colors.blue,),
             title: Text('Clientes'),
             onTap: (){
-              Navigator.pushReplacementNamed(context, ListaClientesPage.routeName);
+              _getClientes(context);
             },
           ), 
           Divider(),
@@ -118,6 +119,31 @@ class MenuWidget extends StatelessWidget {
           decodedResp['telefono'], 
           decodedResp['latitud'], 
           decodedResp['longitud']));
+    }
+  }
+
+
+  _getClientes(BuildContext context) async {
+    final prefs = new PreferenciasUsuario();
+    final resp = await http.get('http://testsoft.nl/api/clientes', headers: {
+      "Accept": "application/json",
+      "Authorization": prefs.token}
+    );
+    if(resp.statusCode == 200){
+      List<Cliente> lista = [];
+      List<dynamic> decodedResp = convert.jsonDecode(resp.body);
+      decodedResp.forEach((item) => 
+        lista.add(
+          Cliente(
+            item['nombre'], 
+            item['direccion'], 
+            item['telefono'], 
+            item['latitud'], 
+            item['longitud']
+          )
+        )
+      );
+      Navigator.pushReplacementNamed(context, ListaClientesPage.routeName, arguments: lista);
     }
   }
 
