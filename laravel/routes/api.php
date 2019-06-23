@@ -12,5 +12,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('ubicacion', 'Api\ApiController@getUbicacion');
     Route::get('usuario', 'Api\ApiController@getUsuario');
     Route::get('clientes', 'Api\ApiController@getClientes');
+    Route::get('horarios', 'Api\ApiController@getHorarios');
 
 });

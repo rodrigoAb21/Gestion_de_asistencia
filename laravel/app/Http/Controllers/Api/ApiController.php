@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Asignacion_Clientes;
+use App\Horario;
 use App\Ubicacion;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -34,5 +35,18 @@ class ApiController extends Controller
         return $clientes;
     }
 
+    public function getHorarios(){
+        $id = Auth::user()->id;
+        $horarios = Horario::with('dias')
+            ->where('horario.visible', '=', true)
+            ->whereIn('horario.id', function($query) use ($id) {
+                $query->from('a_horarios')
+                    ->select('horario_id')
+                    ->where('user_id','=', $id)
+                    ->get();
+            }
+            )->get();
+        return $horarios;
+    }
 
 }
