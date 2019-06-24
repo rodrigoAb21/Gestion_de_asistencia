@@ -1,5 +1,6 @@
 import 'package:app_movil/src/pages/cliente_page.dart';
 import 'package:app_movil/src/pages/home_page.dart';
+import 'package:app_movil/src/pages/horarios_page.dart';
 import 'package:app_movil/src/pages/listaClientes_page.dart';
 import 'package:app_movil/src/pages/login_page.dart';
 import 'package:app_movil/src/pages/settings_page.dart';
@@ -29,6 +30,7 @@ class MyApp extends StatelessWidget {
         UbicacionPage.routeName : ( BuildContext context ) => UbicacionPage(),
         ListaClientesPage.routeName : ( BuildContext context ) => ListaClientesPage(),
         ClientePage.routeName : ( BuildContext context ) => ClientePage(),
+        HorariosPage.routeName : ( BuildContext context ) => HorariosPage(),
       },
     );
   }

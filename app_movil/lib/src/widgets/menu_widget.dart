@@ -1,6 +1,9 @@
 import 'package:app_movil/src/models/cliente_model.dart';
+import 'package:app_movil/src/models/dia_model.dart';
+import 'package:app_movil/src/models/horario_model.dart';
 import 'package:app_movil/src/models/ubicacion_model.dart';
 import 'package:app_movil/src/pages/home_page.dart';
+import 'package:app_movil/src/pages/horarios_page.dart';
 import 'package:app_movil/src/pages/listaClientes_page.dart';
 import 'package:app_movil/src/pages/login_page.dart';
 import 'package:app_movil/src/pages/settings_page.dart';
@@ -59,7 +62,9 @@ class MenuWidget extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.alarm_on, color: Colors.blue,),
             title: Text('Horarios'),
-            onTap: (){},
+            onTap: (){
+              _getHorarios(context);
+            },
           ), 
           Divider(),
           ListTile(
@@ -145,6 +150,32 @@ class MenuWidget extends StatelessWidget {
       );
       Navigator.pushReplacementNamed(context, ListaClientesPage.routeName, arguments: lista);
     }
+  }
+
+  _getHorarios(BuildContext context) async {
+    final prefs = new PreferenciasUsuario();
+    final resp = await http.get('http://testsoft.nl/api/horarios', headers: {
+      "Accept": "application/json",
+      "Authorization": prefs.token}
+    );
+    if(resp.statusCode == 200){
+      List<Horario> lista = [];
+      List<dynamic> decodedResp = convert.jsonDecode(resp.body);
+      decodedResp.forEach((item) => 
+        lista.add(_getHorario(item['nombre'], item['turno'],convert.jsonDecode(convert.jsonEncode(item['dias']))))
+      );
+      Navigator.pushReplacementNamed(context, HorariosPage.routeName, arguments: lista);
+    }
+  }
+
+  Horario _getHorario(String nombre, String turno, List<dynamic> decodedResp){
+    List<Dia> dias = [];
+    decodedResp.forEach((item) => 
+      dias.add(
+        Dia(item['nombre'], item['entrada'], item['salida'])
+      )
+    );
+    return Horario(nombre, turno, dias);
   }
 
 }

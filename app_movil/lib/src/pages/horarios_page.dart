@@ -43,18 +43,18 @@ class HorariosPage extends StatelessWidget {
 
   List<Widget> _cargarHorario(Horario horario) {
     List<Widget> list = [];
-    list.add(Text('$horario.nombre - $horario.turno', style: TextStyle(fontWeight: FontWeight.bold)));
+    list.add(Padding(padding:EdgeInsets.only(top: 10.0),child: Text('${horario.nombre} - ${horario.turno}', style: TextStyle(fontWeight: FontWeight.bold)),));
     horario.dias.forEach(
       (item) => 
         list.add(
           ListTile(
             title: Text(item.nombre),
-            subtitle: Text('$item.entrada - $item.salida'),
+            subtitle: Text('${item.entrada} - ${item.salida}'),
           )
         )
       
     );
-    list.add(Divider());
+    
 
     return list;
 
