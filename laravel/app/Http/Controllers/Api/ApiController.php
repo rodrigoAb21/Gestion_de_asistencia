@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Asignacion_Clientes;
 use App\Horario;
 use App\Ubicacion;
 use App\Http\Controllers\Controller;

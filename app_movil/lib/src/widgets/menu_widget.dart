@@ -14,14 +14,18 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class MenuWidget extends StatelessWidget {
+
+  final prefs = new PreferenciasUsuario();
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          DrawerHeader(
-            child: Container(),
+          UserAccountsDrawerHeader(
+            accountName: Text(prefs.nombre),
+            accountEmail: Text(prefs.email),
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/menu-img.jpg'),
@@ -36,12 +40,6 @@ class MenuWidget extends StatelessWidget {
               Navigator.pushReplacementNamed(context, HomePage.routeName);
             },
           ), 
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.account_box, color: Colors.blue,),
-            title: Text('Cuenta'),
-            onTap: (){},
-          ),
           Divider(),
           ListTile(
             leading: Icon(Icons.business, color: Colors.blue,),
@@ -102,6 +100,8 @@ class MenuWidget extends StatelessWidget {
     if(resp.statusCode == 204){
       final prefs = new PreferenciasUsuario();
       prefs.token = '';
+      prefs.email = '';
+      prefs.nombre = '';
       Navigator.pushReplacementNamed(context, LoginPage.routeName);
     }
 

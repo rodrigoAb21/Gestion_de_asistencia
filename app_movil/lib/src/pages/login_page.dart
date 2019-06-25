@@ -98,12 +98,20 @@ class _LoginPageState extends State<LoginPage> {
 
     var decodedResp = convert.jsonDecode(resp.body);
 
-    print(decodedResp);
-
     if(decodedResp.containsKey('access_token')){
       final prefs = new PreferenciasUsuario();
       prefs.token = 'Bearer ' + decodedResp['access_token'];
-      Navigator.pushReplacementNamed(context, HomePage.routeName);
+
+      final r2 = await http.get('http://testsoft.nl/api/usuario', headers: {
+        "Accept": "application/json",
+        "Authorization": prefs.token}
+      );
+      if(r2.statusCode == 200){
+        var decodedResp = convert.jsonDecode(r2.body);
+        prefs.nombre = decodedResp['nombre'];
+        prefs.email = decodedResp['email'];
+        Navigator.pushReplacementNamed(context, HomePage.routeName);
+      }
     }
 
 

@@ -33,6 +33,8 @@ class PreferenciasUsuario {
     return 'login';
   }
 
+
+
   get token {
     return _prefs.getString('token') ?? '';
   }
@@ -40,6 +42,24 @@ class PreferenciasUsuario {
   set token( String value ) {
     _prefs.setString('token', value);
   }
+
+  get nombre {
+    return _prefs.getString('nombre') ?? '';
+  }
+
+  set nombre( String value ) {
+    _prefs.setString('nombre', value);
+  }
+
+  get email {
+    return _prefs.getString('email') ?? '';
+  }
+
+  set email( String value ) {
+    _prefs.setString('email', value);
+  }
+
+  
 
 }
 
