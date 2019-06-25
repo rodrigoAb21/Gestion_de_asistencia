@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:app_movil/src/widgets/menu_widget.dart';
 import 'package:local_auth/local_auth.dart';
+import 'package:geolocator/geolocator.dart';
 
 class HomePage extends StatefulWidget {
   static final String routeName = 'home';
@@ -39,6 +40,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _authorizeNow() async {
     bool isAuthorized = false;
+    Position position;
     try {
       isAuthorized = await _localAuthentication.authenticateWithBiometrics(
         localizedReason: "Use su huella digital para autenticarse",
@@ -52,7 +54,17 @@ class _HomePageState extends State<HomePage> {
     if (!mounted) return;
 
     if (isAuthorized) {
-      // autenticado
+      try {
+      final Geolocator geolocator = Geolocator()
+        ..forceAndroidLocationManager = true;
+      position = await geolocator.getLastKnownPosition(
+          desiredAccuracy: LocationAccuracy.best);
+          print(position);
+    } on PlatformException {
+      position = null;
+      print("ERROR!");
+    }
+      
     } else {
       //no autenticado
     }
