@@ -36,6 +36,7 @@ class ListaClientesPage extends StatelessWidget {
           Navigator.pushNamed(context, ClientePage.routeName,arguments: item);
         },
         ));
+        list.add(Divider());
     }
     return list;
   }
