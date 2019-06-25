@@ -55,15 +55,13 @@ class _HomePageState extends State<HomePage> {
 
     if (isAuthorized) {
       try {
-      final Geolocator geolocator = Geolocator()
-        ..forceAndroidLocationManager = true;
-      position = await geolocator.getLastKnownPosition(
-          desiredAccuracy: LocationAccuracy.best);
-          print(position);
-    } on PlatformException {
-      position = null;
-      print("ERROR!");
-    }
+        final Geolocator geolocator = Geolocator()..forceAndroidLocationManager = true;
+        position = await geolocator.getLastKnownPosition(desiredAccuracy: LocationAccuracy.best);
+        print(position);
+      } on PlatformException {
+        position = null;
+        print("ERROR!");
+      }
       
     } else {
       //no autenticado
