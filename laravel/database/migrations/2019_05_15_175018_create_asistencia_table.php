@@ -16,9 +16,11 @@ class CreateAsistenciaTable extends Migration
         Schema::create('asistencia', function (Blueprint $table) {
             $table->increments('id');
             $table->date('fecha');
-            $table->string('entrada');
-            $table->string('salida');
-            $table->string('estado');
+            $table->string('dia');
+            $table->string('hora');
+            $table->double('latitud');
+            $table->double('longitud');
+            $table->string('tipo');
 
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

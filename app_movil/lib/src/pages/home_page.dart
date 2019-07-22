@@ -1,8 +1,11 @@
+import 'package:app_movil/src/util/herramientas.dart';
+import 'package:app_movil/src/util/preferencias_usuario.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:app_movil/src/widgets/menu_widget.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   static final String routeName = 'home';
@@ -39,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   final LocalAuthentication _localAuthentication = LocalAuthentication();
 
   Future<void> _authorizeNow() async {
+    final prefs = new PreferenciasUsuario();
     bool isAuthorized = false;
     Position position;
     try {
@@ -55,9 +59,28 @@ class _HomePageState extends State<HomePage> {
 
     if (isAuthorized) {
       try {
-        final Geolocator geolocator = Geolocator()..forceAndroidLocationManager = true;
-        position = await geolocator.getLastKnownPosition(desiredAccuracy: LocationAccuracy.best);
-        print(position);
+        final Geolocator geolocator = Geolocator()
+        ..forceAndroidLocationManager = true;
+        position = await geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.best);
+        
+        final asistencia = {
+          'fecha'    : Herramientas().getFecha(),
+          'dia'      : Herramientas().getDia(),
+          'hora'     : Herramientas().getHora(),
+          'latitud'  : '${position.latitude}',
+          'longitud' : '${position.longitude}',
+          'tipo'     : 'Entrada'
+        };
+        final resp = await http.post('http://testsoft.nl/api/entrada', body: asistencia, headers: {
+        "Accept": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": prefs.token});
+        if(resp.statusCode == 200){
+          print('OK!');
+        }else{
+          print(resp.statusCode);
+        }
       } on PlatformException {
         position = null;
         print("ERROR!");

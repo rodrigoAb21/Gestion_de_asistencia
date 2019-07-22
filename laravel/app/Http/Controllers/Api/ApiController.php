@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Asistencia;
 use App\Horario;
 use App\Ubicacion;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -48,4 +50,17 @@ class ApiController extends Controller
         return $horarios;
     }
 
+    public function marcarEntrada(Request $request){
+        $asistencia = new Asistencia();
+        $asistencia->fecha = $request['fecha'];
+        $asistencia->dia = $request['dia'];
+        $asistencia->hora = $request['hora'];
+        $asistencia->latitud = $request['latitud'];
+        $asistencia->longitud = $request['longitud'];
+        $asistencia->tipo = $request['tipo'];
+        $asistencia->user_id = Auth::user()->id;
+        $asistencia->save();
+
+        return response()->json([], 200);
+    }
 }
