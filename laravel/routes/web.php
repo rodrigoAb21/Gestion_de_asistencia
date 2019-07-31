@@ -49,3 +49,25 @@ Route::middleware('auth')->group(function () {
     Route::post('reportes', 'web\ReporteController@getReporte');
 });
 
+Route::get('prueba', function (){
+    $apiKey = 'AIzaSyAiw5KGY8korLZOLBOE6KO9hK-Ol4WKkwQ';
+    $data = array('body' => 'New message');
+    $flutter = array('click_action' => 'FLUTTER_NOTIFICATION_CLICK');
+    $to = 'e9rzYwlUxpQ:APA91bFut3p1Mj7sc1SVpK2kd9tQm4w5LvOAr-ZOlFWt3-HAcnS0bP6U98vYmG3faAwWfFVacYj7IP3M1Hge3bnwQ7QS5bQK3Gy7VoRQZLeq-wEQqabpg0DTROm-94k53urf0VfRgbYU';
+    $fields = array( 'to' => $to, 'notification' => $data, 'data' => $flutter);
+    $headers = array('Authorization: key='.$apiKey, 'Content-Type: application/json');
+    $url = 'https://fcm.googleapis.com/fcm/send';
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    return json_decode($result, true);
+});

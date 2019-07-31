@@ -14,5 +14,4 @@ Route::middleware('auth:api')->group(function () {
     Route::get('clientes', 'Api\ApiController@getClientes');
     Route::get('horarios', 'Api\ApiController@getHorarios');
     Route::post('entrada', 'Api\ApiController@marcarEntrada');
-
 });
